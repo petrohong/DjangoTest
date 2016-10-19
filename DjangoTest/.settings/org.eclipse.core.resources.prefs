@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
 encoding//photo/admin.py=utf-8
+encoding//photo/forms.py=utf-8
+encoding//photo/migrations/0001_initial.py=utf-8
 encoding//photo/models.py=utf-8
+encoding//photo/views.py=utf-8
 encoding/<project>=UTF-8
