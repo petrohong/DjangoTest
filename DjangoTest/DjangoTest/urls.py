@@ -18,6 +18,7 @@ from django.conf.urls import url, patterns, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from profiles.urls import urlpatterns as profile_urls 
 
 urlpatterns = patterns('',
     url(r'^photo/(?P<photo_id>\d+)/$', 'photo.views.single_photo', name='view_single_photo'),
@@ -25,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/', 'django.contrib.auth.views.login', name='login', kwargs={'template_name': 'login.html'}),
     url(r'^accounts/logout/', 'django.contrib.auth.views.logout', name='logout'),
+    url(r'^user/', include(profile_urls, namespace='profiles')),
 )
 
 if settings.DEBUG:

@@ -3,10 +3,12 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.core.urlresolvers import reverse_lazy
+from django.conf import settings
 
 # Create your models here.
 class Photo(models.Model):
     id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     image_file = models.ImageField(upload_to='%Y%m%d')
     filtered_image_file = models.ImageField(upload_to='static_files/uploaded/filtered/%Y%m%d')
     description = models.TextField(max_length=500, blank=True)

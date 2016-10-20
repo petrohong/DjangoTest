@@ -5,6 +5,9 @@ from __future__ import unicode_literals
 from .models import Photo
 from django.shortcuts import get_object_or_404, render, redirect
 from photo.forms import PhotoEditForm
+from django.db.transaction import commit
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 '''
 def single_photo(request, *args):
@@ -27,14 +30,18 @@ def single_photo(request, photo_id):
                       'photo': photo,
                       }
                   )
-    
+
+@login_required
 def new_photo(request):
     if request.method == "GET":
         edit_form = PhotoEditForm()
     elif request.method == "POST":
         edit_form = PhotoEditForm(request.POST, request.FILES)
         if edit_form.is_valid() :
-            new_photo = edit_form.save()
+            new_photo = edit_form.save(commit = False)
+            new_photo.user = request.user
+            new_photo.save()
+            
             return redirect(new_photo.get_absolute_url())
         
     return render(request,
