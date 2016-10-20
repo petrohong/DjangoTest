@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form method="POST" action="{% url 'new_photo' %}" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{form.as_p}}
+	
+	{% comment %}
+	{% for field in form %}
+	<p>
+		{% if field.errors %}
+		<ul>
+			{% for error in field.errors %}
+			<li>{{error}}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{{field}}
+	</p>
+	{% endfor %}
+	{% endcomment %}
+	<p>
+	
+		<input type="submit" />
+	</p>
+</form>
+
+{% endblock %}
